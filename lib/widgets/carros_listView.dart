@@ -1,7 +1,7 @@
 
-import 'package:carros/domain/carro.dart';
-import 'package:carros/pages/carro_page.dart';
-import 'package:carros/utils/nav.dart';
+import 'package:carro/domain/carros.dart';
+import 'package:carro/pages/carro_page.dart';
+import 'package:carro/utils/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 

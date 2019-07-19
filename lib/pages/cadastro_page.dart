@@ -1,6 +1,6 @@
-import 'package:carro/domain/services/login_service.dart';
 import 'package:carro/firebase/firebase_service.dart';
 import 'package:carro/pages/home_page.dart';
+import 'package:carro/pages/login_page.dart';
 import 'package:carro/utils/alerts.dart';
 import 'package:carro/utils/nav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,61 +8,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
-import 'cadastro_page.dart';
-
-class LoginPage extends StatefulWidget {
+class CadastroPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _CadastroPageState createState() => _CadastroPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final _tLogin = TextEditingController(text: "rlecheta@gmail.com");
-  final _tSenha = TextEditingController(text: "ricardo");
+class _CadastroPageState extends State<CadastroPage> {
+  final _tNome = TextEditingController();
+  final _tEmail = TextEditingController();
+  final _tSenha = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   var _progress = false;
-
-  FirebaseUser fUser;
-  var showForm = false;
-
+  
   void initState() {
     super.initState();
 
-    FirebaseAuth.instance.currentUser().then((fUser) {
-      setState(() {
-        this.fUser = fUser;
-        if (fUser != null) {
-          pushReplacement(context, HomePage());
-        } else {
-          showForm = true;
-        }
-      });
-    });
-
-    RemoteConfig.instance.then((remoteConfig) {
-      remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: true));
-
-      try {
-        remoteConfig.fetch(expiration: const Duration(minutes: 1));
-        remoteConfig.activateFetched();
-      } catch (error) {
-        print("Remote Config: $error");
-      }
-
-      final mensagem = remoteConfig.getString("mensagem");
-
-      print('Mensagem: $mensagem');
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: fUser != null
-            ? Text("Carros ${fUser.displayName}")
-            : Text("Carros"),
+        centerTitle: true,
+        title: Text("Cadastro"),
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
@@ -72,20 +42,34 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _body(BuildContext context) {
-    if (!showForm) {
-      return Container(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
 
     return Form(
       key: _formKey,
       child: ListView(
         children: <Widget>[
           TextFormField(
-            controller: _tLogin,
+            controller: _tNome,
+            validator: _validateNome,
+            keyboardType: TextInputType.text,
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 22,
+            ),
+            decoration: InputDecoration(
+              labelText: "Nome",
+              labelStyle: TextStyle(
+                color: Colors.black,
+                fontSize: 22,
+              ),
+              hintText: "Digite o seu nome",
+              hintStyle: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          TextFormField(
+            controller: _tEmail,
             validator: _validateLogin,
             keyboardType: TextInputType.text,
             style: TextStyle(
@@ -137,52 +121,51 @@ class _LoginPageState extends State<LoginPage> {
                       valueColor: AlwaysStoppedAnimation(Colors.white),
                     )
                   : Text(
-                      "Login",
+                      "Cadastrar",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22,
                       ),
                     ),
               onPressed: () {
-                _onClickLogin(context);
-              },
-            ),
-          ),
-          Container(
-            height: 46,
-            margin: EdgeInsets.only(top: 20),
-            child: GoogleSignInButton(
-              onPressed: () {
-                _onClickLoginGoogle(context);
-              },
-            ),
-          ),
-          Container(
-            height: 46,
-            margin: EdgeInsets.only(top: 20),
-            child: InkWell(
-              onTap: () {
                 _onClickCadastrar(context);
               },
-              child: Text(
-                "Cadastre-se",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
             ),
           ),
+          Container(
+            height: 46,
+            margin: EdgeInsets.only(top: 20),
+            child: RaisedButton(
+              color: Colors.white,
+              child: Text(
+                "Cancelar",
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 22,
+                ),
+              ),
+              onPressed: () {
+                _onClickCancelar(context);
+              },
+            ),
+          ),
+
         ],
       ),
     );
   }
 
+  String _validateNome(String text) {
+    if (text.isEmpty) {
+      return "Informe o nome";
+    }
+
+    return null;
+  }
+
   String _validateLogin(String text) {
     if (text.isEmpty) {
-      return "Informe o login";
+      return "Informe o email";
     }
 
     return null;
@@ -199,39 +182,29 @@ class _LoginPageState extends State<LoginPage> {
     return null;
   }
 
-  _onClickCadastrar(context) {
-    pushReplacement(context, CadastroPage());
+  _onClickCancelar(context) {
+    pushReplacement(context,LoginPage());
   }
 
-  void _onClickLoginGoogle(context) async {
-    print("Google");
+  _onClickCadastrar(context) async {
+    print("Cadastrar!");
 
-    final service = FirebaseService();
-    final response = await service.loginGoogle();
+    String nome = _tNome.text;
+    String email = _tEmail.text;
+    String senha = _tSenha.text;
 
-    if (response.isOk()) {
-      pushReplacement(context, HomePage());
-    } else {
-      alert(context, "Erro", response.msg);
-    }
-  }
-
-  void _onClickLogin(context) async {
-    final login = _tLogin.text;
-    final senha = _tSenha.text;
+    print("Nome $nome, Email $email, Senha $senha");
 
     if (!_formKey.currentState.validate()) {
       return;
     }
-
-    print("Login: $login, senha: $senha");
 
     setState(() {
       _progress = true;
     });
 
     final service = FirebaseService();
-    final response = await service.login(login, senha);
+    final response = await service.cadastrar(nome, email, senha);
 
     if (response.isOk()) {
       pushReplacement(context, HomePage());
@@ -243,4 +216,6 @@ class _LoginPageState extends State<LoginPage> {
       _progress = false;
     });
   }
+
+
 }

@@ -1,10 +1,10 @@
 
-import 'package:carros/domain/carro.dart';
-import 'package:carros/domain/db/CarroDB.dart';
-import 'package:carros/domain/services/carro_service.dart';
-import 'package:carros/pages/carro_page.dart';
-import 'package:carros/utils/nav.dart';
-import 'package:carros/widgets/carros_listView.dart';
+import 'package:carro/domain/carros.dart';
+import 'package:carro/domain/db/CarroDB.dart';
+import 'package:carro/domain/services/carro_service.dart';
+import 'package:carro/pages/carro_page.dart';
+import 'package:carro/utils/nav.dart';
+import 'package:carro/widgets/carros_listView.dart';
 import 'package:flutter/material.dart';
 
 class FavoritosPage extends StatefulWidget {

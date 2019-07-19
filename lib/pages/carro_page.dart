@@ -1,10 +1,10 @@
-import 'package:carros/domain/carro.dart';
-import 'package:carros/domain/db/CarroDB.dart';
-import 'package:carros/domain/services/carro_service.dart';
-import 'package:carros/pages/carro_form_page.dart';
-import 'package:carros/pages/map_page.dart';
-import 'package:carros/utils/alerts.dart';
-import 'package:carros/utils/nav.dart';
+import 'package:carro/domain/carros.dart';
+import 'package:carro/domain/db/CarroDB.dart';
+import 'package:carro/domain/services/carro_service.dart';
+import 'package:carro/pages/carro_form_page.dart';
+import 'package:carro/pages/map_page.dart';
+import 'package:carro/utils/alerts.dart';
+import 'package:carro/utils/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

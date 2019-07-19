@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:carros/domain/carro.dart';
-import 'package:carros/domain/services/carros_bloc.dart';
-import 'package:carros/widgets/carros_listView.dart';
+import 'package:carro/domain/carros.dart';
+import 'package:carro/domain/services/carros_bloc.dart';
+import 'package:carro/widgets/carros_listView.dart';
 import 'package:flutter/material.dart';
 
 class CarrosPage extends StatefulWidget {

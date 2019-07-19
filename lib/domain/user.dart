@@ -1,7 +1,6 @@
 
 import 'dart:convert';
-
-import 'package:carros/utils/prefs.dart';
+import 'package:carro/utils/prefs.dart';
 
 class User {
   final String nome;

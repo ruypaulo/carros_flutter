@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:carros/domain/carro.dart';
-import 'package:carros/domain/services/carro_service.dart';
-import 'package:carros/utils/alerts.dart';
-import 'package:carros/utils/nav.dart';
+import 'package:carro/domain/carros.dart';
+import 'package:carro/domain/services/carro_service.dart';
+import 'package:carro/utils/alerts.dart';
+import 'package:carro/utils/nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

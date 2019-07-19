@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "175048792180",
+    "firebase_url": "https://carrosruy.firebaseio.com",
+    "project_id": "carrosruy",
+    "storage_bucket": "carrosruy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175048792180:android:bc6a88c1f94714a7",
+        "android_client_info": {
+          "package_name": "livroandroid.com.br.carro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175048792180-gq2047ocb0mpp4t50s6f7fi5tqo83n8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "livroandroid.com.br.carro",
+            "certificate_hash": "e05ed9320cfbfe0aba87bff009dbf276dfe51c58"
+          }
+        },
+        {
+          "client_id": "175048792180-nejqqtlpk7mqmot6oflbdbi6a86ko0t1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2RucLhkqecfGebvCrj7HqS3g3zW9c5Tg"
+        },
+        {
+          "current_key": "AIzaSyAWLi8c0BPTWXKcknHopMQfhbB_12RQeSQ"
+        },
+        {
+          "current_key": "AIzaSyDCJhH542rV39rAVbI2GXBbp25v-bWRzYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175048792180-nejqqtlpk7mqmot6oflbdbi6a86ko0t1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

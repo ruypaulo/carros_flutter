@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:carros/domain/response.dart';
-import 'package:carros/domain/user.dart';
+import 'package:carro/domain/response.dart';
+import 'package:carro/domain/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
 
 class LoginService {
+  // ignore: missing_return
   static Future<Response> login(String login, String senha) async {
 
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -16,19 +17,24 @@ class LoginService {
     }
 
     try {
-      var url = "http://livrowebservices.com.br/rest/login";
+      var url = 'http://LivrowebServices.com.br/rest/login';
 
-      final body = {"login": login, "senha": senha};
-
-      final response = await http.post(url, body: body);
+      final response =
+          await http.post(url, body: {'login': login, 'senha': senha});
 
       final s = response.body;
       print(s);
 
       final r = Response.fromJson(json.decode(s));
 
-      final user = User("Ricardo Flutter",login,"rlecheta@flutter.com");
-      user.save();
+      if(r.isOk()) {
+        final user = User(
+          "Ricardo Flutter", 
+          login, 
+          "rlecheta@flutter.com"
+          );
+          user.save();
+      }
 
       return r;
     } catch (error) {
@@ -37,9 +43,8 @@ class LoginService {
   }
 
   static String handleError(error) {
-    print(error);
     return error is SocketException
-        ? "Internet indisponível. Por favor, verifique a sua conexão"
-        : "Ocorreu um erro no login";
+        ? "Internet indisponível. Por favor verifique a sua conexão."
+        : "Ocorreu um erro no login.";
   }
 }

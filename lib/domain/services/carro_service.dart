@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:carro/domain/carros.dart';
+import 'package:carro/domain/response.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:carros/domain/carro.dart';
-import 'package:carros/domain/response.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 
